@@ -1,0 +1,1224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>AutoTechs.AI · PE Outreach</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1014;
+    --bg-elev: #14181f;
+    --bg-card: #181d26;
+    --bg-hover: #1f2530;
+    --border: #252b36;
+    --border-strong: #343c4a;
+    --text: #e8e3d6;
+    --text-muted: #8a8f99;
+    --text-dim: #5d6470;
+    --amber: #d4934b;
+    --amber-bright: #e8a85a;
+    --amber-dim: rgba(212, 147, 75, 0.12);
+    --sage: #7ba87f;
+    --sage-dim: rgba(123, 168, 127, 0.12);
+    --clay: #c87060;
+    --clay-dim: rgba(200, 112, 96, 0.12);
+    --steel: #6f8aa6;
+    --steel-dim: rgba(111, 138, 166, 0.12);
+    --gold: #c9a961;
+    --gold-dim: rgba(201, 169, 97, 0.12);
+    --display: 'Fraunces', Georgia, serif;
+    --body: 'Geist', -apple-system, system-ui, sans-serif;
+    --mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--text); font-family: var(--body); font-size: 14px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  body {
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(212, 147, 75, 0.06), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(111, 138, 166, 0.04), transparent);
+    min-height: 100vh;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; }
+
+  /* Header */
+  header {
+    border-bottom: 1px solid var(--border);
+    background: rgba(13, 16, 20, 0.85);
+    backdrop-filter: blur(10px);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner {
+    max-width: 1400px; margin: 0 auto; padding: 18px 28px;
+    display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+  }
+  .brand {
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .brand-mark {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    font-style: italic;
+  }
+  .brand-mark .accent { color: var(--amber); font-style: normal; }
+  .brand-sub {
+    font-family: var(--mono); font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.18em;
+    color: var(--text-dim);
+  }
+  nav { display: flex; gap: 4px; margin-left: auto; }
+  nav button {
+    background: none; border: none; color: var(--text-muted);
+    padding: 8px 16px; font-size: 13px; font-weight: 500;
+    border-radius: 6px; transition: all 0.15s;
+    font-family: var(--body);
+  }
+  nav button:hover { color: var(--text); background: var(--bg-hover); }
+  nav button.active {
+    color: var(--amber-bright);
+    background: var(--amber-dim);
+  }
+  .header-stats {
+    display: flex; gap: 24px; font-family: var(--mono); font-size: 11px;
+    color: var(--text-dim); border-left: 1px solid var(--border); padding-left: 24px;
+  }
+  .header-stats .stat { display: flex; flex-direction: column; gap: 2px; }
+  .header-stats .stat-num { color: var(--text); font-size: 14px; font-weight: 600; }
+  .header-stats .stat-label { text-transform: uppercase; letter-spacing: 0.1em; }
+
+  /* Layout */
+  main { max-width: 1400px; margin: 0 auto; padding: 32px 28px 80px; }
+  .view { display: none; }
+  .view.active { display: block; animation: fade 0.3s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  /* Page titles */
+  .page-title {
+    font-family: var(--display); font-weight: 400; font-style: italic;
+    font-size: 36px; letter-spacing: -0.02em; line-height: 1.1;
+    margin-bottom: 6px;
+  }
+  .page-title .accent { color: var(--amber); font-style: italic; }
+  .page-sub {
+    color: var(--text-muted); font-size: 13px; margin-bottom: 32px;
+    max-width: 720px;
+  }
+
+  /* Pipeline View */
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .stat-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    padding: 22px 24px; border-radius: 10px;
+    position: relative; overflow: hidden;
+  }
+  .stat-card .label {
+    font-family: var(--mono); font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.16em; color: var(--text-dim); margin-bottom: 12px;
+  }
+  .stat-card .value {
+    font-family: var(--display); font-size: 38px; font-weight: 500;
+    letter-spacing: -0.02em; line-height: 1;
+  }
+  .stat-card .meta { color: var(--text-muted); font-size: 12px; margin-top: 6px; font-family: var(--mono); }
+
+  .funnel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 24px; margin-bottom: 28px; }
+  .funnel-title { font-family: var(--display); font-size: 20px; font-weight: 500; margin-bottom: 18px; letter-spacing: -0.01em; }
+  .funnel-row {
+    display: grid; grid-template-columns: 160px 1fr 60px 50px;
+    align-items: center; gap: 14px; padding: 8px 0;
+    font-size: 13px;
+  }
+  .funnel-label { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+  .funnel-bar { background: var(--bg); border-radius: 3px; height: 8px; position: relative; overflow: hidden; }
+  .funnel-bar-fill { height: 100%; background: linear-gradient(90deg, var(--amber), var(--amber-bright)); border-radius: 3px; transition: width 0.4s ease; }
+  .funnel-count { font-family: var(--mono); text-align: right; color: var(--text); font-weight: 500; }
+  .funnel-pct { font-family: var(--mono); text-align: right; color: var(--text-dim); font-size: 11px; }
+
+  .conv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .conv-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 18px; }
+  .conv-card .label { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-dim); margin-bottom: 10px; }
+  .conv-card .value { font-family: var(--display); font-size: 26px; font-weight: 500; }
+  .conv-card .benchmark { color: var(--text-muted); font-size: 11px; margin-top: 6px; font-family: var(--mono); }
+
+  /* Contacts View */
+  .controls {
+    display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; align-items: center;
+    background: var(--bg-card); border: 1px solid var(--border); padding: 14px 16px; border-radius: 10px;
+  }
+  .controls input, .controls select {
+    background: var(--bg); border: 1px solid var(--border); color: var(--text);
+    padding: 8px 12px; font-family: var(--body); font-size: 13px; border-radius: 6px;
+    outline: none; transition: border-color 0.15s;
+  }
+  .controls input:focus, .controls select:focus { border-color: var(--amber); }
+  .controls input { flex: 1; min-width: 200px; }
+  .controls .count { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--text-dim); }
+
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; }
+  .contact-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px; cursor: pointer;
+    transition: all 0.15s; position: relative;
+  }
+  .contact-card:hover { background: var(--bg-hover); border-color: var(--border-strong); transform: translateY(-1px); }
+  .contact-card.priority {
+    border-color: rgba(212, 147, 75, 0.4);
+    box-shadow: 0 0 0 1px var(--amber-dim);
+  }
+  .contact-card.priority::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: var(--amber); border-radius: 10px 0 0 10px;
+  }
+  .contact-card.skip { opacity: 0.5; }
+
+  .contact-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+  .contact-name {
+    font-family: var(--display); font-weight: 500; font-size: 17px;
+    letter-spacing: -0.01em; line-height: 1.2;
+  }
+  .contact-title { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+  .contact-company { color: var(--text-dim); font-size: 11px; font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 6px; }
+
+  .badges { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+  .badge {
+    font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 3px 8px; border-radius: 4px; font-weight: 500;
+    border: 1px solid transparent;
+  }
+  .badge-tier-1 { background: var(--sage-dim); color: var(--sage); }
+  .badge-tier-2 { background: var(--gold-dim); color: var(--gold); }
+  .badge-tier-3 { background: var(--steel-dim); color: var(--steel); }
+  .badge-priority { background: var(--amber-dim); color: var(--amber-bright); border-color: rgba(212, 147, 75, 0.3); }
+  .badge-skip { background: var(--clay-dim); color: var(--clay); }
+  .badge-verified { background: var(--sage-dim); color: var(--sage); }
+  .badge-tofind { background: var(--bg); color: var(--text-dim); border-color: var(--border); }
+  .badge-persona { background: var(--steel-dim); color: var(--steel); }
+  .badge-msg { background: var(--amber-dim); color: var(--amber-bright); border-color: rgba(212, 147, 75, 0.3); }
+
+  /* Status pill on card */
+  .status-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--mono); font-size: 11px;
+    padding: 4px 10px; border-radius: 12px; margin-top: 10px;
+    background: var(--bg); border: 1px solid var(--border);
+  }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text-dim); }
+  .status-pill[data-status="Connection sent"] .status-dot,
+  .status-pill[data-status="Connected"] .status-dot { background: var(--steel); }
+  .status-pill[data-status="Messaged"] .status-dot { background: var(--gold); }
+  .status-pill[data-status="Replied"] .status-dot,
+  .status-pill[data-status="Call booked"] .status-dot,
+  .status-pill[data-status="Call done"] .status-dot,
+  .status-pill[data-status="Pilot scoped"] .status-dot,
+  .status-pill[data-status="Pilot live"] .status-dot,
+  .status-pill[data-status="Won"] .status-dot { background: var(--sage); }
+  .status-pill[data-status="Lost"] .status-dot,
+  .status-pill[data-status="No-fit"] .status-dot { background: var(--clay); }
+
+  /* Modal / Drawer */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    z-index: 200; display: none; align-items: flex-start; justify-content: center;
+    padding: 40px 20px; overflow-y: auto;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--bg-elev); border: 1px solid var(--border-strong);
+    border-radius: 12px; width: 100%; max-width: 680px;
+    padding: 32px; position: relative;
+    animation: modalIn 0.2s ease;
+  }
+  @keyframes modalIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+  .modal-close {
+    position: absolute; top: 18px; right: 18px;
+    background: var(--bg); border: 1px solid var(--border);
+    width: 32px; height: 32px; border-radius: 6px; color: var(--text-muted);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .modal-close:hover { color: var(--text); border-color: var(--border-strong); }
+
+  .modal h2 {
+    font-family: var(--display); font-weight: 500; font-style: italic;
+    font-size: 28px; letter-spacing: -0.02em; margin-bottom: 4px;
+  }
+  .modal .modal-title { color: var(--text-muted); font-size: 13px; margin-bottom: 2px; }
+  .modal .modal-company { color: var(--text-dim); font-size: 12px; font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.08em; }
+  .modal-badges { display: flex; gap: 6px; flex-wrap: wrap; margin: 14px 0 24px; }
+
+  .form-section { margin-top: 20px; }
+  .form-section-title {
+    font-family: var(--mono); font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.16em; color: var(--text-dim); margin-bottom: 10px;
+    padding-bottom: 6px; border-bottom: 1px solid var(--border);
+  }
+  .form-row { display: grid; grid-template-columns: 140px 1fr; gap: 12px; align-items: center; margin-bottom: 8px; }
+  .form-row label { color: var(--text-muted); font-size: 12px; }
+  .form-row input, .form-row select, .form-row textarea {
+    background: var(--bg); border: 1px solid var(--border); color: var(--text);
+    padding: 7px 11px; font-family: var(--body); font-size: 13px;
+    border-radius: 5px; outline: none; transition: border-color 0.15s;
+    width: 100%;
+  }
+  .form-row textarea { font-family: var(--body); resize: vertical; min-height: 80px; }
+  .form-row input:focus, .form-row select:focus, .form-row textarea:focus { border-color: var(--amber); }
+
+  /* Messages View */
+  .message-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 24px; margin-bottom: 18px;
+    position: relative;
+  }
+  .message-card.priority {
+    border-color: rgba(212, 147, 75, 0.4);
+  }
+  .message-card.priority::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: var(--amber); border-radius: 10px 0 0 10px;
+  }
+  .message-card.hold {
+    border-color: rgba(200, 112, 96, 0.3);
+  }
+  .message-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; }
+  .message-person {
+    font-family: var(--display); font-weight: 500; font-size: 20px; letter-spacing: -0.01em;
+  }
+  .message-meta { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+  .message-rank {
+    font-family: var(--mono); font-size: 11px; color: var(--text-dim);
+    border: 1px solid var(--border); padding: 3px 8px; border-radius: 4px;
+  }
+  .message-hook {
+    background: var(--bg); border-left: 2px solid var(--steel);
+    padding: 10px 14px; margin-bottom: 16px; font-size: 12px;
+    color: var(--text-muted); border-radius: 0 4px 4px 0;
+  }
+  .message-hook strong { color: var(--text); }
+  .message-section { margin-bottom: 16px; }
+  .message-label {
+    font-family: var(--mono); font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.14em; color: var(--text-dim); margin-bottom: 8px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .message-body {
+    background: var(--bg); border: 1px solid var(--border);
+    padding: 14px 16px; border-radius: 6px;
+    font-size: 13px; line-height: 1.6; white-space: pre-wrap;
+    font-family: var(--body);
+  }
+  .copy-btn {
+    background: var(--amber-dim); border: 1px solid rgba(212, 147, 75, 0.3);
+    color: var(--amber-bright); padding: 4px 10px; font-size: 10px;
+    font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.1em;
+    border-radius: 4px; font-weight: 500;
+    transition: all 0.15s;
+  }
+  .copy-btn:hover { background: rgba(212, 147, 75, 0.2); color: var(--amber-bright); }
+  .copy-btn.copied { background: var(--sage-dim); color: var(--sage); border-color: var(--sage); }
+  .char-count { font-family: var(--mono); font-size: 10px; color: var(--text-dim); }
+
+  /* Notes / Strategy view */
+  .strategy-section {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 28px; margin-bottom: 18px;
+  }
+  .strategy-section.critical { border-color: rgba(200, 112, 96, 0.3); }
+  .strategy-section.critical .strategy-title { color: var(--clay); }
+  .strategy-title {
+    font-family: var(--display); font-size: 22px; font-weight: 500; font-style: italic;
+    letter-spacing: -0.01em; margin-bottom: 14px;
+  }
+  .strategy-section ol, .strategy-section ul { padding-left: 20px; }
+  .strategy-section li { margin: 8px 0; color: var(--text); font-size: 13px; }
+  .strategy-section li strong { color: var(--amber-bright); }
+  .strategy-section p { margin: 8px 0; font-size: 13px; }
+  .strategy-section .kbd {
+    font-family: var(--mono); font-size: 11px; background: var(--bg); border: 1px solid var(--border);
+    padding: 2px 6px; border-radius: 3px; color: var(--amber);
+  }
+
+  /* Footer / Actions */
+  .actions-bar {
+    margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border);
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+  }
+  .btn {
+    background: var(--bg-card); border: 1px solid var(--border); color: var(--text);
+    padding: 8px 14px; font-size: 12px; font-family: var(--mono);
+    text-transform: uppercase; letter-spacing: 0.1em; border-radius: 6px;
+    transition: all 0.15s; font-weight: 500;
+  }
+  .btn:hover { background: var(--bg-hover); border-color: var(--border-strong); }
+  .btn-primary { background: var(--amber-dim); color: var(--amber-bright); border-color: rgba(212, 147, 75, 0.3); }
+  .btn-primary:hover { background: rgba(212, 147, 75, 0.2); }
+  .btn-danger { color: var(--clay); }
+  .btn-danger:hover { background: var(--clay-dim); border-color: rgba(200, 112, 96, 0.3); }
+  .actions-spacer { flex: 1; }
+  .actions-meta { font-family: var(--mono); font-size: 11px; color: var(--text-dim); }
+
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+    background: var(--bg-card); border: 1px solid var(--sage);
+    color: var(--sage); padding: 10px 18px; border-radius: 6px;
+    font-family: var(--mono); font-size: 12px;
+    opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    z-index: 300;
+  }
+  .toast.show { opacity: 1; }
+
+  @media (max-width: 768px) {
+    .header-inner { padding: 14px 18px; gap: 16px; }
+    .header-stats { padding-left: 0; border-left: none; flex-wrap: wrap; gap: 12px; }
+    main { padding: 24px 16px 60px; }
+    .page-title { font-size: 28px; }
+    .controls { flex-direction: column; align-items: stretch; }
+    .controls .count { margin-left: 0; }
+    .form-row { grid-template-columns: 1fr; }
+    nav { width: 100%; overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-mark">AutoTechs<span class="accent">.</span>AI</div>
+      <div class="brand-sub">PE Outreach · Ops Room</div>
+    </div>
+    <nav>
+      <button data-view="pipeline" class="active">Pipeline</button>
+      <button data-view="contacts">Contacts</button>
+      <button data-view="messages">Messages</button>
+      <button data-view="strategy">Strategy</button>
+    </nav>
+    <div class="header-stats" id="header-stats"></div>
+  </div>
+</header>
+
+<main>
+  <!-- PIPELINE VIEW -->
+  <section class="view active" id="view-pipeline">
+    <h1 class="page-title">Pipeline <span class="accent">/</span> live</h1>
+    <p class="page-sub">Live state of every active conversation. Updates as you mark statuses in the Contacts tab.</p>
+
+    <div class="grid-3" id="top-stats"></div>
+
+    <div class="funnel">
+      <div class="funnel-title">Stage funnel</div>
+      <div id="funnel-rows"></div>
+    </div>
+
+    <div class="conv-grid" id="conv-grid"></div>
+  </section>
+
+  <!-- CONTACTS VIEW -->
+  <section class="view" id="view-contacts">
+    <h1 class="page-title">Contacts <span class="accent">/</span> list</h1>
+    <p class="page-sub">Click any card to update status, log dates, and add notes. Priority sends are flagged with an amber rail.</p>
+
+    <div class="controls">
+      <input type="text" id="search" placeholder="Search name, title, company…" />
+      <select id="filter-status">
+        <option value="">All statuses</option>
+      </select>
+      <select id="filter-company">
+        <option value="">All companies</option>
+      </select>
+      <select id="filter-tier">
+        <option value="">All tiers</option>
+        <option value="1">Tier 1</option>
+        <option value="2">Tier 2</option>
+        <option value="3">Tier 3</option>
+      </select>
+      <select id="filter-verified">
+        <option value="">All</option>
+        <option value="verified">Verified only</option>
+        <option value="tofind">To find</option>
+        <option value="message">Has message</option>
+      </select>
+      <div class="count" id="contact-count"></div>
+    </div>
+
+    <div class="contact-grid" id="contact-grid"></div>
+  </section>
+
+  <!-- MESSAGES VIEW -->
+  <section class="view" id="view-messages">
+    <h1 class="page-title">Personalized <span class="accent">/</span> messages</h1>
+    <p class="page-sub">Drafted, ready to send. Click copy on the full message or the connection invite. Send order matters — respect the Sun Auto and Mavis single-entry rules in the Strategy tab.</p>
+    <div id="messages-list"></div>
+  </section>
+
+  <!-- STRATEGY VIEW -->
+  <section class="view" id="view-strategy">
+    <h1 class="page-title">Strategy <span class="accent">/</span> playbook</h1>
+    <p class="page-sub">The non-obvious rules. Read once, then come back when you're tempted to violate them.</p>
+
+    <div class="strategy-section critical">
+      <div class="strategy-title">Sun Auto entry strategy — critical</div>
+      <p>5 active Sun Auto contacts (Ripani, Pazderny, Powell, Loa, Castle). Treat the platform as <strong>one shot, not five</strong>. They compare notes in Tuesday ops meetings.</p>
+      <ol>
+        <li><strong>Day 1.</strong> Send Chris Ripani. His Modern Tire Dealer quote is the hook. Highest-leverage send on the entire list.</li>
+        <li><strong>Day 3.</strong> Only if Ripani hasn't replied in 48 hrs, send Chris Pazderny. Same problem framing. Don't mention Ripani.</li>
+        <li><strong>Week 2+.</strong> If either Chris engages, ask which Regional VP to coordinate with. Don't pre-message Powell or Loa.</li>
+        <li><strong>Never (this round).</strong> Don't message Shawn Castle. Wrong function (CX, not ops).</li>
+        <li><strong>Hold.</strong> Tony Puckett (CEO) — only after Ripani engages.</li>
+      </ol>
+    </div>
+
+    <div class="strategy-section critical">
+      <div class="strategy-title">Mavis entry strategy — critical</div>
+      <p>5 active Mavis contacts (Sisson, Fetters, Rush, Smith, Guardino). Same single-entry rule. Mavis closed Midas in June 2025 — now 3,500+ stores including 1,300 Midas franchises. The integration variance is THE strategic problem at HQ right now.</p>
+      <ol>
+        <li><strong>Day 1.</strong> Send Brian Sisson with the Midas integration hook. SVP Retail Operations across the full network.</li>
+        <li><strong>Day 3.</strong> If silent, send Tracy Fetters. Express Oil heritage = strongest mechanical fit.</li>
+        <li><strong>Week 2+.</strong> Regional VPs (Rush GA, Smith FL, Guardino PA) only after an exec opens the door.</li>
+        <li><strong>Skip.</strong> Trey Cook (M&amp;A, wrong function — but note as possible warm bridge to Randy Harris) and Richard Fackrell (store construction, wrong function).</li>
+      </ol>
+      <p><strong>Fit caveat.</strong> Pure Mavis stores are a shallower fit than Sun Auto. The VVL solenoid case study lands strongest with Express Oil-heritage folks (Fetters) or Midas integration framing (Sisson). For pure tire/brake regional VPs, lean on brake/alignment diagnostic variance instead.</p>
+    </div>
+
+    <div class="strategy-section">
+      <div class="strategy-title">Daily rhythm</div>
+      <ol>
+        <li><strong>20-minute calendar block.</strong> Same time daily. Campaign dies without rhythm.</li>
+        <li><strong>5–10 sends per day max.</strong> Quality over volume. LinkedIn throttles spray-and-pray.</li>
+        <li><strong>Warm before you reach out.</strong> Like + thoughtful comment on a recent post 1–24 hours before sending the invite. Don't pitch in the comment.</li>
+        <li><strong>One follow-up only.</strong> Day 7 if no reply. Tone: "Bumping this — even a 'not now' is helpful." Then drop it.</li>
+      </ol>
+    </div>
+
+    <div class="strategy-section">
+      <div class="strategy-title">When someone replies</div>
+      <ol>
+        <li><strong>Reply within 4 hours.</strong> Same day minimum. Lag kills momentum.</li>
+        <li><strong>One goal in the reply:</strong> book the 20-min call. Not pitch. Not "tell me more."</li>
+        <li><strong>Attach the case study PDF here</strong> — this is the right moment, not in the opener.</li>
+        <li><strong>Suggest 3 specific times.</strong> "Tue 2pm / Wed 10am / Thu 4pm — which works, or want me to propose more?"</li>
+      </ol>
+    </div>
+
+    <div class="strategy-section">
+      <div class="strategy-title">Questions for the first call</div>
+      <ol>
+        <li>Across your shops, where's variance widest — between top and bottom-quartile shops, or between A-techs and B-techs within the same shop?</li>
+        <li>Of the complex diagnostic categories — drivability, electrical, ADAS, HVAC — which is the biggest senior-tech bottleneck right now?</li>
+        <li>If you ran a pilot at one shop, what metric would have to move for it to be worth scaling?</li>
+        <li>Who else in your org would need to weigh in?</li>
+      </ol>
+      <p>Don't pitch on call #1 unless they ask. Listen, dump answers into the contact's Notes after the call.</p>
+    </div>
+
+    <div class="strategy-section">
+      <div class="strategy-title">Benchmarks to watch</div>
+      <ul>
+        <li><strong>Connection acceptance:</strong> 40–60% cold, 70%+ if warmed up first. Under 30% → profile or invite text isn't landing.</li>
+        <li><strong>Reply rate:</strong> 15–25% on cold-but-targeted LinkedIn DM. Under 10% → opener is too generic.</li>
+        <li><strong>Reply → call:</strong> 40–50%. Under that → the free pilot offer isn't being made clearly enough.</li>
+        <li><strong>Call → pilot:</strong> 25–40%. Higher → not asking sharp enough qualifying questions.</li>
+        <li><strong>Stop sequencing rule:</strong> If you're under 10% reply rate after 25 sends, stop and rework the opener. Don't grind through the rest of the list with a broken message.</li>
+      </ul>
+    </div>
+
+    <div class="actions-bar">
+      <button class="btn btn-primary" id="btn-export">Export JSON backup</button>
+      <button class="btn" id="btn-import">Import JSON</button>
+      <input type="file" id="import-file" accept=".json" style="display:none" />
+      <div class="actions-spacer"></div>
+      <div class="actions-meta">Data lives in your browser only.</div>
+      <button class="btn btn-danger" id="btn-reset">Reset all data</button>
+    </div>
+  </section>
+</main>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="modal-content"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+// DATA — 57 contacts + 10 personalized messages
+// ============================================================
+const CONTACTS = [
+  // Sun Auto (1-5, 51, 52)
+  {id:1, tier:1, company:"Sun Auto Tire & Service", sponsor:"Leonard Green & Partners", locations:"700+", name:"Tony Puckett", title:"CEO", verified:true, persona:"B", notes_static:"35-yr Valvoline vet; ex-head of Valvoline Quick Lube (grew 900→1,500). Tucson HQ. HOLD until Ripani engages.", hasMessage:true, msgRank:7},
+  {id:2, tier:1, company:"Sun Auto Tire & Service", sponsor:"Leonard Green & Partners", locations:"700+", name:"Chris Ripani", title:"COO", verified:true, persona:"B", notes_static:"20+ yrs Bridgestone. HBS. Nashville. PUBLIC QUOTE in Modern Tire Dealer on technician shortage — use as hook.", priority:true, hasMessage:true, msgRank:1},
+  {id:3, tier:1, company:"Sun Auto Tire & Service", sponsor:"Leonard Green & Partners", locations:"700+", name:"Chris Pazderny", title:"VP Operations Excellence", verified:true, persona:"B", notes_static:"Ex-Caliber Auto Care. Houston. Likely faster sales cycle than Ripani.", hasMessage:true, msgRank:2},
+  {id:4, tier:1, company:"Sun Auto Tire & Service", sponsor:"Leonard Green & Partners", locations:"700+", name:"[Find on LinkedIn]", title:"VP Technical Training / Service", verified:false, persona:"B", notes_static:"Filter: Company: Sun Auto Tire & Service | Title: training OR technical OR \"technical service\" OR \"learning\"."},
+  {id:5, tier:1, company:"Sun Auto Tire & Service", sponsor:"Leonard Green & Partners", locations:"700+", name:"Steve Powell", title:"Regional VP — DFW / Texas", verified:true, persona:"C", notes_static:"Tire Choice → Monro → Sun Auto since 2017. TX = Sun's largest market (126 stores). Pilot-host after exec opens door."},
+  {id:51, tier:1, company:"Sun Auto Tire & Service", sponsor:"Leonard Green & Partners", locations:"700+", name:"Michael Loa", title:"Regional VP — Southeast Region", verified:true, persona:"C", notes_static:"Came in via Lamb's Tire acquisition. Austin TX-based. Covers LA/MS/FL/VA."},
+  {id:52, tier:3, company:"Sun Auto Tire & Service", sponsor:"Leonard Green & Partners", locations:"700+", name:"Shawn Castle", title:"VP Customer Care & Client Experience", verified:true, persona:"—", skip:true, notes_static:"Pure CX/contact-center role. Ex-Valvoline customer support. NOT a buyer."},
+
+  // Mavis (6-9, 53-57)
+  {id:6, tier:1, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"David Sorbaro", title:"Co-CEO", verified:true, persona:"B", notes_static:"Founding family. HOLD until Sisson engages."},
+  {id:7, tier:1, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Stephen Sorbaro", title:"Co-CEO", verified:true, persona:"B", notes_static:"Founding family. HOLD until Sisson engages."},
+  {id:8, tier:1, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Brian Sisson", title:"SVP Retail Operations", verified:true, persona:"B", notes_static:"Runs ops across full 3,500-store network. Equivalent of Ripani at Sun Auto. Use Midas integration hook.", priority:true, hasMessage:true, msgRank:3},
+  {id:9, tier:1, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Tracy Fetters", title:"Regional VP (Express Oil heritage)", verified:true, persona:"B", notes_static:"Skid Marks → Express Oil → Mavis. Wesley Chapel FL. Express Oil heritage = strongest mechanical fit."},
+  {id:53, tier:1, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Darrell Rush", title:"Regional VP Operations", verified:true, persona:"C", notes_static:"28+ yrs retail tire/auto. Operations + Finance background. Marietta GA. Pilot host candidate."},
+  {id:54, tier:1, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Steve Smith", title:"Regional VP", verified:true, persona:"C", notes_static:"Kauffman Tire heritage. Jacksonville FL. Pilot host candidate."},
+  {id:55, tier:1, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Kevin Guardino", title:"Regional VP Operations", verified:true, persona:"C", notes_static:"US Army First Lieutenant (3rd Infantry). Pittsburgh area. Pilot host candidate."},
+  {id:56, tier:3, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Trey Cook", title:"SVP Acquisitions", verified:true, persona:"—", skip:true, notes_static:"M&A only — wrong function. BUT possible warm intro path to Randy Harris (Express Oil VP Training)."},
+  {id:57, tier:3, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Richard Fackrell", title:"VP Store Set-Up & Development", verified:true, persona:"—", skip:true, notes_static:"Pure retail construction (ex-Party City). Wrong function."},
+
+  // Express Oil (10-13)
+  {id:10, tier:1, company:"Express Oil Change & Tire Engineers", sponsor:"BayPine + TSG (via Mavis)", locations:"300+", name:"Richard 'Ricky' Brooks", title:"CEO", verified:true, persona:"B", notes_static:"Co-founder; bought from Lunceford 1996. Birmingham AL.", hasMessage:true, msgRank:10},
+  {id:11, tier:1, company:"Express Oil Change & Tire Engineers", sponsor:"BayPine + TSG (via Mavis)", locations:"300+", name:"Jim Durkin", title:"President", verified:true, persona:"B", notes_static:"President of operating company."},
+  {id:12, tier:1, company:"Express Oil Change & Tire Engineers", sponsor:"BayPine + TSG (via Mavis)", locations:"300+", name:"Randy Harris", title:"VP Training & Development", verified:true, persona:"B", notes_static:"BEST PERSONA FIT — owns tech training budget across 300+ shops.", priority:true, hasMessage:true, msgRank:4},
+  {id:13, tier:1, company:"Express Oil Change & Tire Engineers", sponsor:"BayPine + TSG (via Mavis)", locations:"300+", name:"[Find on LinkedIn]", title:"VP Operations / SVP Service", verified:false, persona:"B", notes_static:"Note Terry Emerson left for Mammoth in Nov 2024 — seat may be filled."},
+
+  // Brakes Plus (14-15)
+  {id:14, tier:1, company:"Brakes Plus", sponsor:"BayPine + TSG (via Mavis)", locations:"150+", name:"[Find on LinkedIn]", title:"President / GM", verified:false, persona:"B", notes_static:"HQ moved to Round Rock TX in 2025."},
+  {id:15, tier:1, company:"Brakes Plus", sponsor:"BayPine + TSG (via Mavis)", locations:"150+", name:"[Find on LinkedIn]", title:"VP Operations / Training", verified:false, persona:"B", notes_static:"Mechanical-heavy chain, strong fit."},
+
+  // Tuffy (16)
+  {id:16, tier:1, company:"Tuffy Tire & Auto Service", sponsor:"BayPine + TSG (via Mavis)", locations:"200+", name:"Roger Hill", title:"President (Mavis combined leadership)", verified:true, persona:"B", notes_static:"Came in via Tuffy acquisition."},
+
+  // CBA (17-21)
+  {id:17, tier:1, company:"Christian Brothers Automotive", sponsor:"Roark Capital", locations:"290+", name:"Donnie Carr", title:"President & CEO", verified:true, persona:"B", notes_static:"Son of founder Mark Carr. Faith-driven culture — softer tone.", hasMessage:true, msgRank:8},
+  {id:18, tier:1, company:"Christian Brothers Automotive", sponsor:"Roark Capital", locations:"290+", name:"Michael Allnutt", title:"COO", verified:true, persona:"B", notes_static:"17 yrs at CBA, was a franchisee 2007-17. Knows the bay floor.", hasMessage:true, msgRank:5},
+  {id:19, tier:1, company:"Christian Brothers Automotive", sponsor:"Roark Capital", locations:"290+", name:"[Find on LinkedIn]", title:"VP Operations / Store Performance Coaching", verified:false, persona:"B", notes_static:"Allnutt leads SPC team — find his direct reports."},
+  {id:20, tier:1, company:"Christian Brothers Automotive", sponsor:"Roark Capital", locations:"290+", name:"[Find on LinkedIn]", title:"VP Technical / Technician Development", verified:false, persona:"B", notes_static:"Champion path."},
+  {id:21, tier:1, company:"Christian Brothers Automotive", sponsor:"Roark Capital", locations:"290+", name:"[Find on LinkedIn]", title:"VP Technology / CTO / CIO", verified:false, persona:"A", notes_static:"AI/diagnostic tools land here."},
+
+  // Big Brand (22-25)
+  {id:22, tier:1, company:"Big Brand Tire & Service", sponsor:"TSG Consumer Partners", locations:"215+", name:"Joseph Buscaglia", title:"CEO", verified:true, persona:"B", notes_static:"Moorpark CA HQ.", hasMessage:true, msgRank:9},
+  {id:23, tier:1, company:"Big Brand Tire & Service", sponsor:"TSG Consumer Partners", locations:"215+", name:"Matt Eckman", title:"COO", verified:true, persona:"B", notes_static:"Public on Tires To You acquisition 2024.", hasMessage:true, msgRank:6},
+  {id:24, tier:1, company:"Big Brand Tire & Service", sponsor:"TSG Consumer Partners", locations:"215+", name:"[Find on LinkedIn]", title:"VP Operations / Service", verified:false, persona:"B", notes_static:""},
+  {id:25, tier:1, company:"Big Brand Tire & Service", sponsor:"TSG Consumer Partners", locations:"215+", name:"[Find on LinkedIn]", title:"VP Technician / Training", verified:false, persona:"B", notes_static:""},
+
+  // Tire Discounters (26-28)
+  {id:26, tier:2, company:"Tire Discounters", sponsor:"Bain Capital", locations:"200+", name:"[Find on LinkedIn]", title:"CEO / President", verified:false, persona:"B", notes_static:"Bain bought majority stake 2022. Cincinnati-based."},
+  {id:27, tier:2, company:"Tire Discounters", sponsor:"Bain Capital", locations:"200+", name:"[Find on LinkedIn]", title:"COO / VP Operations", verified:false, persona:"B", notes_static:""},
+  {id:28, tier:2, company:"Tire Discounters", sponsor:"Bain Capital", locations:"200+", name:"[Find on LinkedIn]", title:"VP Technical / Training", verified:false, persona:"B", notes_static:""},
+
+  // Driven (29-33)
+  {id:29, tier:2, company:"Meineke Car Care Centers", sponsor:"Driven Brands (Roark)", locations:"700+", name:"[Find on LinkedIn]", title:"Brand President", verified:false, persona:"B", notes_static:"Mechanical fit."},
+  {id:30, tier:2, company:"Meineke Car Care Centers", sponsor:"Driven Brands (Roark)", locations:"700+", name:"[Find on LinkedIn]", title:"VP Operations", verified:false, persona:"B", notes_static:""},
+  {id:31, tier:2, company:"Take 5 Oil Change", sponsor:"Driven Brands (Roark)", locations:"1,100+", name:"[Find on LinkedIn]", title:"Brand President", verified:false, persona:"B", notes_static:"Quick lube — lower diagnostic complexity."},
+  {id:32, tier:2, company:"Driven Brands HQ", sponsor:"Roark Capital (public RCRG)", locations:"5,000+ system", name:"[Find on LinkedIn]", title:"COO / SVP Operations", verified:false, persona:"A", notes_static:"Cross-portfolio role."},
+  {id:33, tier:2, company:"Driven Brands HQ", sponsor:"Roark Capital (public RCRG)", locations:"5,000+ system", name:"[Find on LinkedIn]", title:"VP Technology / Technical Services", verified:false, persona:"A", notes_static:"AI roadmap likely sits here."},
+
+  // Caliber (34-35)
+  {id:34, tier:2, company:"Caliber Auto Care", sponsor:"Hellman & Friedman", locations:"100+", name:"[Find on LinkedIn]", title:"President — Mechanical Division", verified:false, persona:"B", notes_static:"Caliber's mechanical arm. Distinct from collision side."},
+  {id:35, tier:2, company:"Caliber Auto Care", sponsor:"Hellman & Friedman", locations:"100+", name:"[Find on LinkedIn]", title:"VP Operations — Mechanical", verified:false, persona:"B", notes_static:""},
+
+  // Pep Boys (36-37)
+  {id:36, tier:2, company:"Pep Boys", sponsor:"Icahn Automotive Group", locations:"800+", name:"[Find on LinkedIn]", title:"President / COO", verified:false, persona:"B", notes_static:"Icahn restructuring — verify state of company first."},
+  {id:37, tier:2, company:"Pep Boys", sponsor:"Icahn Automotive Group", locations:"800+", name:"[Find on LinkedIn]", title:"VP Service Operations", verified:false, persona:"B", notes_static:""},
+
+  // Smaller (38-40)
+  {id:38, tier:3, company:"Strickland Brothers 10 Min Oil Change", sponsor:"Atlantic Street Capital", locations:"200+", name:"[Find on LinkedIn]", title:"CEO / President", verified:false, persona:"B", notes_static:"Quick-lube heavy. Less diagnostic depth."},
+  {id:39, tier:3, company:"Greulich's Automotive", sponsor:"Independent (worth tracking)", locations:"30+", name:"[Find on LinkedIn]", title:"CEO / President", verified:false, persona:"B", notes_static:"AZ-based, mechanical-heavy. Reference customer candidate."},
+  {id:40, tier:3, company:"AAMCO Transmissions", sponsor:"American Driveline Systems / TBC", locations:"550+", name:"[Find on LinkedIn]", title:"President / VP Operations", verified:false, persona:"B", notes_static:"Transmission specialty = high diagnostic complexity. Strong fit."},
+
+  // PE firms (41-50)
+  {id:41, tier:1, company:"Leonard Green & Partners", sponsor:"(PE firm itself)", locations:"—", name:"[Find on LinkedIn]", title:"Operating Partner — Consumer/Retail", verified:false, persona:"A", notes_static:"Auto exposure: Sun Auto, Caliber, Mister Car Wash."},
+  {id:42, tier:1, company:"Leonard Green & Partners", sponsor:"(PE firm itself)", locations:"—", name:"[Find on LinkedIn]", title:"Portfolio Operations / Value Creation", verified:false, persona:"A", notes_static:""},
+  {id:43, tier:1, company:"BayPine LP", sponsor:"(PE firm itself)", locations:"—", name:"[Find on LinkedIn]", title:"Operating Partner — Digital Transformation", verified:false, persona:"A", notes_static:"BayPine pitched Mavis deal on 'digital transformation.' Tech-friendly."},
+  {id:44, tier:1, company:"BayPine LP", sponsor:"(PE firm itself)", locations:"—", name:"[Find on LinkedIn]", title:"VP Portfolio Operations", verified:false, persona:"A", notes_static:""},
+  {id:45, tier:1, company:"TSG Consumer / TSG Vantage", sponsor:"(PE firm itself)", locations:"—", name:"[Find on LinkedIn]", title:"TSG Vantage MD / Operating Partner", verified:false, persona:"A", notes_static:"Brian Crandall named MD of TSG Vantage — confirm current role."},
+  {id:46, tier:1, company:"Roark Capital", sponsor:"(PE firm itself)", locations:"—", name:"[Find on LinkedIn]", title:"Operating Partner — Automotive/Service", verified:false, persona:"A", notes_static:"Owns CBA, Driven, Inspire. Atlanta-based."},
+  {id:47, tier:1, company:"Roark Capital", sponsor:"(PE firm itself)", locations:"—", name:"[Find on LinkedIn]", title:"VP Portfolio Resources / Value Creation", verified:false, persona:"A", notes_static:""},
+  {id:48, tier:2, company:"Bain Capital", sponsor:"(PE firm itself)", locations:"—", name:"[Find on LinkedIn]", title:"Operating Partner — Consumer/Retail", verified:false, persona:"A", notes_static:"Owns Tire Discounters."},
+  {id:49, tier:2, company:"Hellman & Friedman", sponsor:"(PE firm itself)", locations:"—", name:"[Find on LinkedIn]", title:"Operating Partner — Consumer/Auto", verified:false, persona:"A", notes_static:"Backed Caliber Collision + Auto Care."},
+  {id:50, tier:2, company:"Greenbriar Equity Group", sponsor:"(PE firm itself)", locations:"—", name:"[Find on LinkedIn]", title:"Partner / Operating Partner — Aftermarket", verified:false, persona:"A", notes_static:"Long history in auto aftermarket. Minority in Sun Auto."}
+];
+
+const MESSAGES = [
+  {
+    rank: 1, contactId: 2, name: "Chris Ripani", title: "COO", company: "Sun Auto Tire & Service",
+    hook: "Public Modern Tire Dealer quote: technician shortage is 'one of the biggest industry challenges' and Sun is 'investing in training.' Quote him back to himself — strongest opener on the list.",
+    invite: `Chris — caught your Modern Tire Dealer comments on diagnostic complexity being a top industry challenge. We just ran a pilot where a junior tech closed a P150C VVL solenoid job independently — 2 hrs faster than the senior, $315 margin saved. Would love to compare notes if open to it.`,
+    body: `Hi Chris — caught your Modern Tire Dealer comments on diagnostic complexity becoming "one of the biggest industry challenges" — and Sun's response of investing in training to close the gap. That framing matches the pattern we're seeing across PE-backed multi-service platforms: bay count isn't the constraint, senior-tech availability on complex work is.
+
+Recent proof: at a service department in Knoxville, a junior tech closed a P150C (VVL solenoid) on a 2013 Grand Cherokee — independently, no senior escalation, 2 hrs faster than the senior would have taken. $315 incremental margin on a single RO. Senior tech's day stayed open for higher-complexity work.
+
+Worth 20 min on whether this matches what you're seeing across the Sun Auto network? If it does, free 60-day pilot at any one location you pick.`,
+    priority: true
+  },
+  {
+    rank: 2, contactId: 3, name: "Chris Pazderny", title: "VP Operations Excellence", company: "Sun Auto Tire & Service",
+    hook: "Title literally = the variance/throughput problem. Ex-Caliber Auto Care. Likely faster sales cycle than Ripani. SEND ONLY if Ripani silent 48 hrs.",
+    invite: null,
+    body: `Hi Chris — coming from Caliber Auto Care into VP Operations Excellence at Sun Auto, you've owned the variance problem at scale longer than most. The lever we work on is the one that quietly determines whether the next 100 stores hit their numbers: the A-tech/B-tech productivity gap on complex diagnostic work.
+
+Recent proof: at a service department in Knoxville, a junior tech closed a complex VVL solenoid job (P150C, 2013 Grand Cherokee) — independently, 2 hrs faster than the senior would have taken, $315 incremental margin on a single RO. Senior tech's schedule stayed clean.
+
+Worth 20 min to compare notes on where this variance shows up across the Sun Auto network? Free 60-day pilot at one location you pick if it lands.`
+  },
+  {
+    rank: 3, contactId: 8, name: "Brian Sisson", title: "SVP Retail Operations", company: "Mavis Tire Express",
+    hook: "Runs ops across full 3,500-store Mavis network. Just closed Midas (June 2025), adding 1,300 mechanical franchises. The integration variance problem is the perfect hook.",
+    invite: `Brian — congrats on the Midas close. Curious how you're handling the variance between Midas mechanical bays and the legacy Mavis network on diagnostic complexity. We just had a junior tech close a P150C VVL job independently, 2 hrs faster than the senior, $315 margin saved. Open to comparing notes?`,
+    body: `Hi Brian — congrats on the Midas close. Curious how you're thinking about it: bolting 1,300 mechanical franchises onto a 2,300-store tire and light-service network is genuinely one of the harder integration problems in the aftermarket — the variance between a Midas bay and a Mavis bay is wide, especially on diagnostic complexity, and the people-side gap (technician bench depth at the franchised locations) compounds it.
+
+We work on exactly that variance. Recent proof: at a service department in Knoxville, a junior tech closed a complex VVL solenoid job (P150C, 2013 Grand Cherokee) — independently, no senior escalation, 2 hrs faster than the senior would have, $315 incremental margin on a single RO.
+
+Worth 20 min on whether this lands inside the Midas integration thesis? If it does, free 60-day pilot at any one location you pick.`,
+    priority: true
+  },
+  {
+    rank: 4, contactId: 12, name: "Randy Harris", title: "VP Training & Development", company: "Express Oil Change & Tire Engineers",
+    hook: "Persona-perfect: owns tech development budget across 300+ shops. Same problem framing as Ripani.",
+    invite: null,
+    body: `Hi Randy — your role is the exact seat I'd love to compare notes with. Scaling technician development across 300+ shops is a problem most people underestimate; the A-tech/B-tech productivity gap doesn't just hit throughput, it decides whether complex jobs leave the bay at all.
+
+Recent example: at a service department in Knoxville, a 2013 Grand Cherokee threw a P150C (VVL solenoid). Senior tech booked 4 days out, car already idle 2 days. We gave a junior tech structured diagnostic guidance — he closed it independently, 2 hrs faster than the senior would have, $315 incremental margin on the single RO.
+
+The interesting part: senior tech's schedule stayed clean for the bigger work.
+
+Worth 20 min? If there's a fit, free 60-day pilot at any one Express Oil shop you pick.`
+  },
+  {
+    rank: 5, contactId: 18, name: "Michael Allnutt", title: "COO", company: "Christian Brothers Automotive",
+    hook: "Was a franchisee 2007–17 before becoming COO. Knows the bay floor. Likely allergic to vendor-speak.",
+    invite: null,
+    body: `Hi Michael — your path from franchisee (2007–17) to COO is unusual in this industry, and I suspect it makes you allergic to operational pitches from people who've never closed a ticket. So I'll keep it short.
+
+We work specifically on the A-tech/B-tech productivity gap. Last month at a Knoxville service department, a junior tech closed a complex VVL solenoid job (P150C, 2013 Grand Cherokee) independently — no senior escalation, 2 hrs faster than the senior would have taken. The car had been sitting 2 days waiting on the only qualified tech who was 4 days out. $315 of margin on a single RO.
+
+Worth 20 min to compare notes on where that gap shows up across the CBA network — especially the variance between top and bottom-quartile shops? Free 60-day pilot at one location if it lands.`
+  },
+  {
+    rank: 6, contactId: 23, name: "Matt Eckman", title: "COO", company: "Big Brand Tire & Service",
+    hook: "Publicly quoted on Tires To You integration — 'meaningful career opportunities.' Use his framing.",
+    invite: null,
+    body: `Hi Matt — saw your comments on the Tires To You integration ("meaningful career opportunities"). That career-pathways angle is one of the hardest things to actually execute at scale, and it's usually what separates platforms that hit their EBITDA targets from the ones that don't.
+
+Quick proof point on that theme: at a Knoxville service department, we ran diagnostic guidance on a complex P150C (VVL solenoid) for a junior tech. Senior tech booked 4 days out, car had sat 2 days. Junior closed it independently — 2 hrs faster than the senior would have, $315 incremental margin on one RO. Senior tech's schedule stayed clean for higher-complexity work.
+
+Worth 20 min on where this variance shows up across Big Brand? Free 60-day pilot at any one shop if it's a fit.`
+  },
+  {
+    rank: 7, contactId: 1, name: "Tony Puckett", title: "CEO", company: "Sun Auto Tire & Service",
+    hook: "HOLD — do not send in week 1. Wait until Ripani/Pazderny engage. CEOs delegate down.",
+    invite: null,
+    body: `Hi Tony — coming from Valvoline Quick Lube (900→1,500) into Sun Auto (200→700+ under LG), you've scaled service ops harder than almost anyone in the aftermarket. The one variable that doesn't scale linearly with stores is technician bench depth — and the A-tech/B-tech productivity gap is where most platforms quietly leak EBITDA.
+
+Recent proof: at a Knoxville service department, a junior tech closed a complex VVL solenoid job (P150C, 2013 Grand Cherokee) — independently, 2 hrs faster than the senior would have, $315 incremental margin on the single RO. Senior tech's day stayed open for the bigger work.
+
+20 min to compare notes on whether this bottleneck matches what you're seeing across the network? Free 60-day pilot at one location if it does.`,
+    hold: true
+  },
+  {
+    rank: 8, contactId: 17, name: "Donnie Carr", title: "President & CEO", company: "Christian Brothers Automotive",
+    hook: "Took CEO from his father 2021. Grew chain 240→290+. Faith-driven brand — softer tone.",
+    invite: null,
+    body: `Hi Donnie — taking the CEO seat from your dad is its own operating challenge, and CBA's growth under your watch (240→290+) speaks for itself. As a service brand scales past 250 shops, the variable that quietly decides whether the next 50 hit their numbers is technician bench depth — specifically the gap between A-techs and the rest.
+
+Recent proof: at a Knoxville service department, a junior tech closed a complex VVL solenoid job (P150C) independently. Senior tech was 4 days out, car was 2 days idle. Junior closed it 2 hrs faster than the senior would have, $315 incremental margin on the single RO.
+
+Worth 20 min on where this shows up across CBA franchisees? Free 60-day pilot at one shop. Happy to route through Michael if ops is the better path.`
+  },
+  {
+    rank: 9, contactId: 22, name: "Joseph Buscaglia", title: "CEO", company: "Big Brand Tire & Service",
+    hook: "Quoted on Tires To You expansion into Austin. Aggressive growth under TSG.",
+    invite: null,
+    body: `Hi Joe — congrats on the Tires To You expansion into Austin. As Big Brand scales past 215 shops, the variable that decides whether margin per bay holds is technician bench depth — and the A-tech/B-tech productivity gap is where most service platforms quietly leak EBITDA.
+
+Quick case: at a Knoxville service department, a junior tech closed a complex VVL solenoid diagnosis (P150C, 2013 Grand Cherokee) — independently, 2 hrs faster than the senior would have, $315 incremental margin on the single RO. The car had sat 2 days waiting on the only qualified tech (booked 4 days out). Senior tech's schedule stayed clean for higher-complexity work.
+
+20 min to compare notes? Free 60-day pilot at one Big Brand location if it's a fit.`
+  },
+  {
+    rank: 10, contactId: 10, name: "Richard 'Ricky' Brooks", title: "CEO", company: "Express Oil Change & Tire Engineers",
+    hook: "Was largest franchisee (14 stores), bought company in '96. Has scaled through 4 PE cycles.",
+    invite: null,
+    body: `Hi Ricky — the path from largest franchisee (14 stores in '96) to CEO buying the company is rare in this industry. Scaling Express Oil through Carousel → Thompson Street → Carousel → the Mavis platform, you've seen every flavor of operational lever pulled at the bay level.
+
+The one we work on is the A-tech/B-tech gap on complex diagnostic work. Recent proof: at a Knoxville service department, a junior tech closed a complex VVL solenoid job (P150C, 2013 Grand Cherokee) — independently, 2 hrs faster than the senior would have, $315 of margin on the single RO. Senior tech's schedule stayed clean.
+
+Worth 20 min on where this shows up across Express Oil / Tire Engineers? Free 60-day pilot at one shop. Happy to route through Randy Harris's team if training is the better path.`
+  }
+];
+
+const STATUS_OPTIONS = [
+  "Not contacted", "Connection sent", "Connected", "Messaged",
+  "Replied", "Call booked", "Call done", "Pilot scoped",
+  "Pilot live", "Won", "Lost", "No-fit"
+];
+
+// ============================================================
+// STATE — loaded from localStorage
+// ============================================================
+const STORAGE_KEY = "autotechs_crm_v1";
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return {};
+    return JSON.parse(raw);
+  } catch (e) { return {}; }
+}
+function saveState(state) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+let state = loadState();
+function getContactState(id) {
+  if (!state[id]) {
+    const c = CONTACTS.find(x => x.id === id);
+    state[id] = {
+      status: c && c.skip ? "No-fit" : "Not contacted",
+      connectionSentDate: "",
+      connected: "",
+      messageSentDate: "",
+      messageVariant: "",
+      replied: "",
+      replyDate: "",
+      callBookedDate: "",
+      callDate: "",
+      nextAction: "",
+      nextActionDate: "",
+      referrals: "",
+      notes: ""
+    };
+  }
+  return state[id];
+}
+
+// Initialize state for every contact
+CONTACTS.forEach(c => getContactState(c.id));
+saveState(state);
+
+// ============================================================
+// RENDER
+// ============================================================
+function $(sel, root) { return (root || document).querySelector(sel); }
+function $$(sel, root) { return Array.from((root || document).querySelectorAll(sel)); }
+
+function escapeHtml(s) {
+  if (s == null) return "";
+  return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+}
+
+function tierBadge(t) {
+  return `<span class="badge badge-tier-${t}">Tier ${t}</span>`;
+}
+function personaBadge(p) {
+  if (!p || p === "—") return "";
+  return `<span class="badge badge-persona">Persona ${p}</span>`;
+}
+function verifiedBadge(v) {
+  return v ? `<span class="badge badge-verified">Verified</span>` : `<span class="badge badge-tofind">To find</span>`;
+}
+
+function renderHeaderStats() {
+  const total = CONTACTS.length;
+  const activable = CONTACTS.filter(c => !c.skip).length;
+  let contacted = 0, replied = 0, calls = 0;
+  CONTACTS.forEach(c => {
+    const s = getContactState(c.id);
+    if (s.status !== "Not contacted" && s.status !== "No-fit") contacted++;
+    if (["Replied", "Call booked", "Call done", "Pilot scoped", "Pilot live", "Won"].includes(s.status)) replied++;
+    if (["Call booked", "Call done", "Pilot scoped", "Pilot live", "Won"].includes(s.status)) calls++;
+  });
+  $("#header-stats").innerHTML = `
+    <div class="stat"><span class="stat-num">${activable}</span><span class="stat-label">Active leads</span></div>
+    <div class="stat"><span class="stat-num">${contacted}</span><span class="stat-label">Contacted</span></div>
+    <div class="stat"><span class="stat-num">${replied}</span><span class="stat-label">Replied+</span></div>
+    <div class="stat"><span class="stat-num">${calls}</span><span class="stat-label">Calls</span></div>
+  `;
+}
+
+function renderPipeline() {
+  // Top stats
+  const active = CONTACTS.filter(c => !c.skip);
+  const total = active.length;
+  let stats = { contacted: 0, messaged: 0, replied: 0, calls: 0, pilots: 0 };
+  active.forEach(c => {
+    const s = getContactState(c.id);
+    if (!["Not contacted", "No-fit"].includes(s.status)) stats.contacted++;
+    if (["Messaged", "Replied", "Call booked", "Call done", "Pilot scoped", "Pilot live", "Won", "Lost"].includes(s.status)) stats.messaged++;
+    if (["Replied", "Call booked", "Call done", "Pilot scoped", "Pilot live", "Won"].includes(s.status)) stats.replied++;
+    if (["Call done", "Pilot scoped", "Pilot live", "Won"].includes(s.status)) stats.calls++;
+    if (["Pilot scoped", "Pilot live", "Won"].includes(s.status)) stats.pilots++;
+  });
+  $("#top-stats").innerHTML = `
+    <div class="stat-card">
+      <div class="label">Active list</div>
+      <div class="value">${total}</div>
+      <div class="meta">${CONTACTS.length - total} marked no-fit</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">In motion</div>
+      <div class="value">${stats.contacted}</div>
+      <div class="meta">${total ? Math.round(stats.contacted / total * 100) : 0}% of active list</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Replies</div>
+      <div class="value">${stats.replied}</div>
+      <div class="meta">${stats.messaged ? Math.round(stats.replied / stats.messaged * 100) : 0}% of messaged</div>
+    </div>
+  `;
+
+  // Funnel
+  const counts = {};
+  STATUS_OPTIONS.forEach(s => counts[s] = 0);
+  CONTACTS.forEach(c => {
+    const st = getContactState(c.id).status;
+    counts[st] = (counts[st] || 0) + 1;
+  });
+  const max = Math.max(...Object.values(counts), 1);
+  $("#funnel-rows").innerHTML = STATUS_OPTIONS.map(s => {
+    const n = counts[s] || 0;
+    const pct = (n / max) * 100;
+    const ofTotal = total ? Math.round(n / CONTACTS.length * 100) : 0;
+    return `
+      <div class="funnel-row">
+        <div class="funnel-label">${s}</div>
+        <div class="funnel-bar"><div class="funnel-bar-fill" style="width:${pct}%"></div></div>
+        <div class="funnel-count">${n}</div>
+        <div class="funnel-pct">${ofTotal}%</div>
+      </div>`;
+  }).join("");
+
+  // Conversion rates
+  const messagedCount = CONTACTS.filter(c => {
+    const s = getContactState(c.id).status;
+    return !["Not contacted", "Connection sent", "Connected", "No-fit"].includes(s);
+  }).length;
+  const connectionSent = CONTACTS.filter(c => getContactState(c.id).connectionSentDate).length;
+  const connected = CONTACTS.filter(c => getContactState(c.id).connected === "Y").length;
+  const repliedCount = CONTACTS.filter(c => getContactState(c.id).replied === "Y").length;
+  const callBooked = CONTACTS.filter(c => {
+    const s = getContactState(c.id).status;
+    return ["Call booked", "Call done", "Pilot scoped", "Pilot live", "Won"].includes(s);
+  }).length;
+  const accRate = connectionSent ? Math.round(connected / connectionSent * 100) : 0;
+  const repRate = messagedCount ? Math.round(repliedCount / messagedCount * 100) : 0;
+  const callRate = repliedCount ? Math.round(callBooked / repliedCount * 100) : 0;
+  $("#conv-grid").innerHTML = `
+    <div class="conv-card">
+      <div class="label">Connection acceptance</div>
+      <div class="value">${accRate}%</div>
+      <div class="benchmark">${connected}/${connectionSent} · benchmark 40-60%</div>
+    </div>
+    <div class="conv-card">
+      <div class="label">Reply rate</div>
+      <div class="value">${repRate}%</div>
+      <div class="benchmark">${repliedCount}/${messagedCount} · benchmark 15-25%</div>
+    </div>
+    <div class="conv-card">
+      <div class="label">Reply → call</div>
+      <div class="value">${callRate}%</div>
+      <div class="benchmark">${callBooked}/${repliedCount} · benchmark 40-50%</div>
+    </div>
+  `;
+}
+
+function contactCard(c) {
+  const s = getContactState(c.id);
+  const classes = ["contact-card"];
+  if (c.priority) classes.push("priority");
+  if (c.skip) classes.push("skip");
+  return `
+    <div class="${classes.join(' ')}" data-id="${c.id}">
+      <div class="contact-head">
+        <div>
+          <div class="contact-name">${escapeHtml(c.name)}</div>
+          <div class="contact-title">${escapeHtml(c.title)}</div>
+          <div class="contact-company">${escapeHtml(c.company)}</div>
+        </div>
+      </div>
+      <div class="badges">
+        ${tierBadge(c.tier)}
+        ${verifiedBadge(c.verified)}
+        ${personaBadge(c.persona)}
+        ${c.priority ? '<span class="badge badge-priority">Priority send</span>' : ''}
+        ${c.skip ? '<span class="badge badge-skip">Skip</span>' : ''}
+        ${c.hasMessage ? `<span class="badge badge-msg">Msg #${c.msgRank}</span>` : ''}
+      </div>
+      <div class="status-pill" data-status="${s.status}"><span class="status-dot"></span>${s.status}</div>
+    </div>
+  `;
+}
+
+function renderContacts() {
+  const q = $("#search").value.toLowerCase().trim();
+  const statusFilter = $("#filter-status").value;
+  const companyFilter = $("#filter-company").value;
+  const tierFilter = $("#filter-tier").value;
+  const verifiedFilter = $("#filter-verified").value;
+
+  const filtered = CONTACTS.filter(c => {
+    const s = getContactState(c.id);
+    if (q) {
+      const hay = `${c.name} ${c.title} ${c.company} ${c.sponsor}`.toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    if (statusFilter && s.status !== statusFilter) return false;
+    if (companyFilter && c.company !== companyFilter) return false;
+    if (tierFilter && String(c.tier) !== tierFilter) return false;
+    if (verifiedFilter === "verified" && !c.verified) return false;
+    if (verifiedFilter === "tofind" && c.verified) return false;
+    if (verifiedFilter === "message" && !c.hasMessage) return false;
+    return true;
+  });
+
+  // Sort: priority first, then verified, then by id
+  filtered.sort((a, b) => {
+    if (a.priority !== b.priority) return a.priority ? -1 : 1;
+    if (a.skip !== b.skip) return a.skip ? 1 : -1;
+    if (a.verified !== b.verified) return a.verified ? -1 : 1;
+    return a.id - b.id;
+  });
+
+  $("#contact-grid").innerHTML = filtered.map(contactCard).join("");
+  $("#contact-count").textContent = `${filtered.length} of ${CONTACTS.length} shown`;
+  // Attach handlers
+  $$("#contact-grid .contact-card").forEach(el => {
+    el.addEventListener("click", () => openModal(Number(el.dataset.id)));
+  });
+}
+
+function openModal(id) {
+  const c = CONTACTS.find(x => x.id === id);
+  const s = getContactState(id);
+  const statusOpts = STATUS_OPTIONS.map(o => `<option value="${o}" ${o === s.status ? 'selected' : ''}>${o}</option>`).join("");
+  const variantOpts = ['', 'A', 'B', 'C', 'P'].map(o => `<option value="${o}" ${o === s.messageVariant ? 'selected' : ''}>${o || '—'}</option>`).join("");
+  const ynOpts = (val) => ['', 'Y', 'N'].map(o => `<option value="${o}" ${o === val ? 'selected' : ''}>${o || '—'}</option>`).join("");
+
+  const msg = MESSAGES.find(m => m.contactId === id);
+
+  $("#modal-content").innerHTML = `
+    <button class="modal-close" id="modal-close">×</button>
+    <div class="modal-title">${escapeHtml(c.title)}</div>
+    <h2>${escapeHtml(c.name)}</h2>
+    <div class="modal-company">${escapeHtml(c.company)} · ${escapeHtml(c.sponsor)} · ${escapeHtml(c.locations)} locations</div>
+    <div class="modal-badges">
+      ${tierBadge(c.tier)}
+      ${verifiedBadge(c.verified)}
+      ${personaBadge(c.persona)}
+      ${c.priority ? '<span class="badge badge-priority">Priority send</span>' : ''}
+      ${c.skip ? '<span class="badge badge-skip">Skip</span>' : ''}
+      ${c.hasMessage ? `<span class="badge badge-msg">Message #${c.msgRank}</span>` : ''}
+    </div>
+
+    ${c.notes_static ? `<div class="message-hook"><strong>Briefing:</strong> ${escapeHtml(c.notes_static)}</div>` : ''}
+
+    <div class="form-section">
+      <div class="form-section-title">Status</div>
+      <div class="form-row"><label>Status</label><select data-field="status">${statusOpts}</select></div>
+      <div class="form-row"><label>Connection sent</label><input type="date" data-field="connectionSentDate" value="${s.connectionSentDate || ''}" /></div>
+      <div class="form-row"><label>Connected?</label><select data-field="connected">${ynOpts(s.connected)}</select></div>
+      <div class="form-row"><label>Message sent</label><input type="date" data-field="messageSentDate" value="${s.messageSentDate || ''}" /></div>
+      <div class="form-row"><label>Message variant</label><select data-field="messageVariant">${variantOpts}</select></div>
+      <div class="form-row"><label>Reply?</label><select data-field="replied">${ynOpts(s.replied)}</select></div>
+      <div class="form-row"><label>Reply date</label><input type="date" data-field="replyDate" value="${s.replyDate || ''}" /></div>
+      <div class="form-row"><label>Call booked</label><input type="date" data-field="callBookedDate" value="${s.callBookedDate || ''}" /></div>
+      <div class="form-row"><label>Call date</label><input type="date" data-field="callDate" value="${s.callDate || ''}" /></div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">Working notes</div>
+      <div class="form-row"><label>Next action</label><input type="text" data-field="nextAction" value="${escapeHtml(s.nextAction)}" placeholder="e.g. follow up Monday" /></div>
+      <div class="form-row"><label>Next action date</label><input type="date" data-field="nextActionDate" value="${s.nextActionDate || ''}" /></div>
+      <div class="form-row"><label>Referrals given</label><input type="text" data-field="referrals" value="${escapeHtml(s.referrals)}" placeholder="names introduced" /></div>
+      <div class="form-row"><label>Notes</label><textarea data-field="notes" placeholder="What they said, context, follow-up cues…">${escapeHtml(s.notes)}</textarea></div>
+    </div>
+
+    ${msg ? `
+    <div class="form-section">
+      <div class="form-section-title">Personalized message · rank #${msg.rank}</div>
+      ${msg.invite ? `
+      <div class="message-section">
+        <div class="message-label">Connection invite <span class="char-count">${msg.invite.length} chars</span><button class="copy-btn" data-copy="invite-${msg.rank}">Copy</button></div>
+        <div class="message-body" id="invite-${msg.rank}">${escapeHtml(msg.invite)}</div>
+      </div>` : ''}
+      <div class="message-section">
+        <div class="message-label">Full message <button class="copy-btn" data-copy="body-${msg.rank}">Copy</button></div>
+        <div class="message-body" id="body-${msg.rank}">${escapeHtml(msg.body)}</div>
+      </div>
+    </div>
+    ` : ''}
+  `;
+
+  $("#modal-overlay").classList.add("open");
+  $("#modal-close").addEventListener("click", closeModal);
+
+  $$("[data-field]", $("#modal-content")).forEach(el => {
+    el.addEventListener("change", () => {
+      const f = el.dataset.field;
+      s[f] = el.value;
+      saveState(state);
+      renderHeaderStats();
+      renderPipeline();
+      renderContacts();
+    });
+    el.addEventListener("input", () => {
+      const f = el.dataset.field;
+      s[f] = el.value;
+      saveState(state);
+    });
+  });
+
+  $$("[data-copy]", $("#modal-content")).forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const targetId = btn.dataset.copy;
+      const text = document.getElementById(targetId).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = "Copied";
+        btn.classList.add("copied");
+        showToast("Copied to clipboard");
+        setTimeout(() => { btn.textContent = "Copy"; btn.classList.remove("copied"); }, 1800);
+      });
+    });
+  });
+}
+
+function closeModal() { $("#modal-overlay").classList.remove("open"); }
+$("#modal-overlay").addEventListener("click", (e) => { if (e.target === $("#modal-overlay")) closeModal(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+function renderMessages() {
+  const sorted = [...MESSAGES].sort((a, b) => a.rank - b.rank);
+  $("#messages-list").innerHTML = sorted.map(m => {
+    const classes = ["message-card"];
+    if (m.priority) classes.push("priority");
+    if (m.hold) classes.push("hold");
+    return `
+      <div class="${classes.join(' ')}">
+        <div class="message-head">
+          <div>
+            <div class="message-person">${escapeHtml(m.name)}</div>
+            <div class="message-meta">${escapeHtml(m.title)} · ${escapeHtml(m.company)}</div>
+          </div>
+          <div class="message-rank">RANK ${String(m.rank).padStart(2, '0')}</div>
+        </div>
+        <div class="message-hook"><strong>Hook:</strong> ${escapeHtml(m.hook)}</div>
+        ${m.invite ? `
+        <div class="message-section">
+          <div class="message-label">Connection invite <span class="char-count">${m.invite.length} chars</span><button class="copy-btn" data-copy-msg="inv-${m.rank}">Copy</button></div>
+          <div class="message-body" id="msg-inv-${m.rank}">${escapeHtml(m.invite)}</div>
+        </div>` : `
+        <div class="message-section">
+          <div class="message-label">Connection invite</div>
+          <div class="message-body" style="color: var(--text-dim); font-style: italic; font-size: 12px;">Connection invite not yet drafted. Use the full message below — but for cold connects, ask Claude to generate a 300-char version first.</div>
+        </div>`}
+        <div class="message-section">
+          <div class="message-label">Full follow-up message <button class="copy-btn" data-copy-msg="body-${m.rank}">Copy</button></div>
+          <div class="message-body" id="msg-body-${m.rank}">${escapeHtml(m.body)}</div>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  $$("[data-copy-msg]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const key = btn.dataset.copyMsg;
+      const text = document.getElementById("msg-" + key).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = "Copied";
+        btn.classList.add("copied");
+        showToast("Copied to clipboard");
+        setTimeout(() => { btn.textContent = "Copy"; btn.classList.remove("copied"); }, 1800);
+      });
+    });
+  });
+}
+
+function showToast(text) {
+  const t = $("#toast");
+  t.textContent = text;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 1800);
+}
+
+// Filter dropdowns
+function populateFilters() {
+  const statusSel = $("#filter-status");
+  STATUS_OPTIONS.forEach(s => {
+    const o = document.createElement("option");
+    o.value = s; o.textContent = s;
+    statusSel.appendChild(o);
+  });
+  const companySel = $("#filter-company");
+  const companies = [...new Set(CONTACTS.map(c => c.company))].sort();
+  companies.forEach(c => {
+    const o = document.createElement("option");
+    o.value = c; o.textContent = c;
+    companySel.appendChild(o);
+  });
+  ["#search", "#filter-status", "#filter-company", "#filter-tier", "#filter-verified"].forEach(sel => {
+    $(sel).addEventListener("input", renderContacts);
+    $(sel).addEventListener("change", renderContacts);
+  });
+}
+
+// Nav
+$$("nav button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    $$("nav button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    $$(".view").forEach(v => v.classList.remove("active"));
+    $("#view-" + btn.dataset.view).classList.add("active");
+    if (btn.dataset.view === "pipeline") { renderHeaderStats(); renderPipeline(); }
+    if (btn.dataset.view === "contacts") { renderContacts(); }
+  });
+});
+
+// Export / import / reset
+$("#btn-export").addEventListener("click", () => {
+  const dataStr = JSON.stringify({ exportedAt: new Date().toISOString(), state }, null, 2);
+  const blob = new Blob([dataStr], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `autotechs-crm-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast("Backup downloaded");
+});
+$("#btn-import").addEventListener("click", () => $("#import-file").click());
+$("#import-file").addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const r = new FileReader();
+  r.onload = () => {
+    try {
+      const parsed = JSON.parse(r.result);
+      if (parsed.state) {
+        state = parsed.state;
+        saveState(state);
+        renderHeaderStats(); renderPipeline(); renderContacts();
+        showToast("Imported");
+      }
+    } catch (err) {
+      showToast("Import failed");
+    }
+  };
+  r.readAsText(file);
+});
+$("#btn-reset").addEventListener("click", () => {
+  if (confirm("Reset all status/notes data? Contacts and messages stay. This can't be undone (unless you've exported a backup).")) {
+    localStorage.removeItem(STORAGE_KEY);
+    state = {};
+    CONTACTS.forEach(c => getContactState(c.id));
+    saveState(state);
+    renderHeaderStats(); renderPipeline(); renderContacts();
+    showToast("Reset");
+  }
+});
+
+// Init
+populateFilters();
+renderHeaderStats();
+renderPipeline();
+renderContacts();
+renderMessages();
+</script>
+
+</body>
+</html>
