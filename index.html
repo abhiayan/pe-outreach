@@ -146,6 +146,14 @@
   }
   .task-btn:hover { background: var(--bg-hover); color: var(--text); border-color: var(--border-strong); }
   .task-btn.btn-open { background: var(--amber-dim); color: var(--amber-bright); border-color: rgba(212, 147, 75, 0.3); }
+  
+  .task-btn.btn-li {
+    background: var(--steel-dim); color: var(--steel); border-color: rgba(111, 138, 166, 0.3);
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .task-btn.btn-li:hover { background: rgba(111, 138, 166, 0.2); color: var(--steel); }
+  .task-btn.btn-li.disabled { opacity: 0.3; pointer-events: none; }
+
   .task-empty {
     text-align: center; padding: 24px; color: var(--text-dim); font-size: 13px;
     border: 1px dashed var(--border); border-radius: 8px;
@@ -297,6 +305,13 @@
     padding: 3px 8px; border-radius: 4px; font-weight: 500;
     border: 1px solid transparent;
   }
+  
+  .badge-li-modal {
+    background: var(--steel-dim); color: var(--steel); border: 1px solid rgba(111, 138, 166, 0.3);
+    cursor: pointer; text-decoration: none;
+  }
+  .badge-li-modal:hover { background: rgba(111, 138, 166, 0.2); }
+
   .badge-tier-1 { background: var(--sage-dim); color: var(--sage); }
   .badge-tier-2 { background: var(--gold-dim); color: var(--gold); }
   .badge-tier-3 { background: var(--steel-dim); color: var(--steel); }
@@ -705,23 +720,23 @@
 const CONTACTS = [
   // Sun Auto (1-5, 51, 52)
   {id:1, tier:1, company:"Sun Auto Tire & Service", sponsor:"Leonard Green & Partners", locations:"700+", name:"Tony Puckett", title:"CEO", verified:true, persona:"B", notes_static:"35-yr Valvoline vet; ex-head of Valvoline Quick Lube (grew 900→1,500). Tucson HQ. HOLD until Ripani engages.", hasMessage:true, msgRank:7},
-  {id:2, tier:1, company:"Sun Auto Tire & Service", sponsor:"Leonard Green & Partners", locations:"700+", name:"Chris Ripani", title:"COO", verified:true, persona:"B", notes_static:"20+ yrs Bridgestone. HBS. Nashville. PUBLIC QUOTE in Modern Tire Dealer on technician shortage — use as hook.", priority:true, hasMessage:true, msgRank:1},
-  {id:3, tier:1, company:"Sun Auto Tire & Service", sponsor:"Leonard Green & Partners", locations:"700+", name:"Chris Pazderny", title:"VP Operations Excellence", verified:true, persona:"B", notes_static:"Ex-Caliber Auto Care. Houston. Likely faster sales cycle than Ripani.", hasMessage:true, msgRank:2},
+  {id:2, tier:1, company:"Sun Auto Tire & Service", sponsor:"Leonard Green & Partners", locations:"700+", name:"Chris Ripani", title:"COO", verified:true, persona:"B", notes_static:"20+ yrs Bridgestone. HBS. Nashville. PUBLIC QUOTE in Modern Tire Dealer on technician shortage — use as hook.", priority:true, hasMessage:true, msgRank:1, linkedin:"https://www.linkedin.com/in/chrisripani"},
+  {id:3, tier:1, company:"Sun Auto Tire & Service", sponsor:"Leonard Green & Partners", locations:"700+", name:"Chris Pazderny", title:"VP Operations Excellence", verified:true, persona:"B", notes_static:"Ex-Caliber Auto Care. Houston. Likely faster sales cycle than Ripani.", hasMessage:true, msgRank:2, linkedin:"https://www.linkedin.com/in/chris-pazderny-b836b5268"},
   {id:4, tier:1, company:"Sun Auto Tire & Service", sponsor:"Leonard Green & Partners", locations:"700+", name:"[Find on LinkedIn]", title:"VP Technical Training / Service", verified:false, persona:"B", notes_static:"Filter: Company: Sun Auto Tire & Service | Title: training OR technical OR \"technical service\" OR \"learning\"."},
-  {id:5, tier:1, company:"Sun Auto Tire & Service", sponsor:"Leonard Green & Partners", locations:"700+", name:"Steve Powell", title:"Regional VP — DFW / Texas", verified:true, persona:"C", notes_static:"Tire Choice → Monro → Sun Auto since 2017. TX = Sun's largest market (126 stores). Pilot-host after exec opens door.", hasMessage:true, msgRank:12},
-  {id:51, tier:1, company:"Sun Auto Tire & Service", sponsor:"Leonard Green & Partners", locations:"700+", name:"Michael Loa", title:"Regional VP — Southeast Region", verified:true, persona:"C", notes_static:"Came in via Lamb's Tire acquisition. Austin TX-based. Covers LA/MS/FL/VA.", hasMessage:true, msgRank:13},
-  {id:52, tier:3, company:"Sun Auto Tire & Service", sponsor:"Leonard Green & Partners", locations:"700+", name:"Shawn Castle", title:"VP Customer Care & Client Experience", verified:true, persona:"—", skip:true, notes_static:"Pure CX/contact-center role. Ex-Valvoline customer support. NOT a buyer."},
+  {id:5, tier:1, company:"Sun Auto Tire & Service", sponsor:"Leonard Green & Partners", locations:"700+", name:"Steve Powell", title:"Regional VP — DFW / Texas", verified:true, persona:"C", notes_static:"Tire Choice → Monro → Sun Auto since 2017. TX = Sun's largest market (126 stores). Pilot-host after exec opens door.", hasMessage:true, msgRank:12, linkedin:"https://www.linkedin.com/in/steve-powell-206b83b7"},
+  {id:51, tier:1, company:"Sun Auto Tire & Service", sponsor:"Leonard Green & Partners", locations:"700+", name:"Michael Loa", title:"Regional VP — Southeast Region", verified:true, persona:"C", notes_static:"Came in via Lamb's Tire acquisition. Austin TX-based. Covers LA/MS/FL/VA.", hasMessage:true, msgRank:13, linkedin:"https://www.linkedin.com/in/michael-loa-47a49858"},
+  {id:52, tier:3, company:"Sun Auto Tire & Service", sponsor:"Leonard Green & Partners", locations:"700+", name:"Shawn Castle", title:"VP Customer Care & Client Experience", verified:true, persona:"—", skip:true, notes_static:"Pure CX/contact-center role. Ex-Valvoline customer support. NOT a buyer.", linkedin:"https://www.linkedin.com/in/shawn-castle-93454b2"},
 
   // Mavis (6-9, 53-57)
   {id:6, tier:1, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"David Sorbaro", title:"Co-CEO", verified:true, persona:"B", notes_static:"Founding family. HOLD until Sisson engages."},
   {id:7, tier:1, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Stephen Sorbaro", title:"Co-CEO", verified:true, persona:"B", notes_static:"Founding family. HOLD until Sisson engages."},
-  {id:8, tier:1, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Brian Sisson", title:"SVP Retail Operations", verified:true, persona:"B", notes_static:"Runs ops across full 3,500-store network. Equivalent of Ripani at Sun Auto. Use Midas integration hook.", priority:true, hasMessage:true, msgRank:3},
-  {id:9, tier:1, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Tracy Fetters", title:"Regional VP (Express Oil heritage)", verified:true, persona:"B", notes_static:"Skid Marks → Express Oil → Mavis. Wesley Chapel FL. Express Oil heritage = strongest mechanical fit.", hasMessage:true, msgRank:11},
-  {id:53, tier:1, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Darrell Rush", title:"Regional VP Operations", verified:true, persona:"C", notes_static:"28+ yrs retail tire/auto. Operations + Finance background. Marietta GA. Pilot host candidate.", hasMessage:true, msgRank:14},
-  {id:54, tier:1, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Steve Smith", title:"Regional VP", verified:true, persona:"C", notes_static:"Kauffman Tire heritage. Jacksonville FL. Pilot host candidate."},
-  {id:55, tier:1, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Kevin Guardino", title:"Regional VP Operations", verified:true, persona:"C", notes_static:"US Army First Lieutenant (3rd Infantry). Pittsburgh area. Pilot host candidate."},
-  {id:56, tier:3, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Trey Cook", title:"SVP Acquisitions", verified:true, persona:"—", skip:true, notes_static:"M&A only — wrong function. BUT possible warm intro path to Randy Harris (Express Oil VP Training)."},
-  {id:57, tier:3, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Richard Fackrell", title:"VP Store Set-Up & Development", verified:true, persona:"—", skip:true, notes_static:"Pure retail construction (ex-Party City). Wrong function."},
+  {id:8, tier:1, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Brian Sisson", title:"SVP Retail Operations", verified:true, persona:"B", notes_static:"Runs ops across full 3,500-store network. Equivalent of Ripani at Sun Auto. Use Midas integration hook.", priority:true, hasMessage:true, msgRank:3, linkedin:"https://www.linkedin.com/in/brian-sisson-1a7804189"},
+  {id:9, tier:1, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Tracy Fetters", title:"Regional VP (Express Oil heritage)", verified:true, persona:"B", notes_static:"Skid Marks → Express Oil → Mavis. Wesley Chapel FL. Express Oil heritage = strongest mechanical fit.", hasMessage:true, msgRank:11, linkedin:"https://www.linkedin.com/in/tracy-fetters-a36518b3"},
+  {id:53, tier:1, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Darrell Rush", title:"Regional VP Operations", verified:true, persona:"C", notes_static:"28+ yrs retail tire/auto. Operations + Finance background. Marietta GA. Pilot host candidate.", hasMessage:true, msgRank:14, linkedin:"https://www.linkedin.com/in/darrell-rush-42540983"},
+  {id:54, tier:1, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Steve Smith", title:"Regional VP", verified:true, persona:"C", notes_static:"Kauffman Tire heritage. Jacksonville FL. Pilot host candidate.", linkedin:"https://www.linkedin.com/in/steve-smith-88a5a571"},
+  {id:55, tier:1, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Kevin Guardino", title:"Regional VP Operations", verified:true, persona:"C", notes_static:"US Army First Lieutenant (3rd Infantry). Pittsburgh area. Pilot host candidate.", linkedin:"https://www.linkedin.com/in/kevin-guardino-84b956224"},
+  {id:56, tier:3, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Trey Cook", title:"SVP Acquisitions", verified:true, persona:"—", skip:true, notes_static:"M&A only — wrong function. BUT possible warm intro path to Randy Harris (Express Oil VP Training).", linkedin:"https://www.linkedin.com/in/trey-cook-765699110"},
+  {id:57, tier:3, company:"Mavis Tire Express", sponsor:"BayPine + TSG Consumer", locations:"3,500+", name:"Richard Fackrell", title:"VP Store Set-Up & Development", verified:true, persona:"—", skip:true, notes_static:"Pure retail construction (ex-Party City). Wrong function.", linkedin:"https://www.linkedin.com/in/richardfackrell"},
 
   // Express Oil (10-13)
   {id:10, tier:1, company:"Express Oil Change & Tire Engineers", sponsor:"BayPine + TSG (via Mavis)", locations:"300+", name:"Richard 'Ricky' Brooks", title:"CEO", verified:true, persona:"B", notes_static:"Co-founder; bought from Lunceford 1996. Birmingham AL.", hasMessage:true, msgRank:10},
@@ -993,10 +1008,20 @@ function getContactState(id) {
       nextAction: "",
       nextActionDate: "",
       referrals: "",
-      notes: ""
+      notes: "",
+      linkedinUrl: ""
     };
   }
   return state[id];
+}
+
+
+// Get LinkedIn URL — state override (user-entered) takes precedence over static
+function getLinkedIn(id) {
+  const s = getContactState(id);
+  if (s.linkedinUrl && s.linkedinUrl.trim()) return s.linkedinUrl.trim();
+  const c = CONTACTS.find(x => x.id === id);
+  return (c && c.linkedin) ? c.linkedin : "";
 }
 
 // Initialize state for every contact
@@ -1142,6 +1167,7 @@ function contactCard(c) {
           <div class="contact-title">${escapeHtml(c.title)}</div>
           <div class="contact-company">${escapeHtml(c.company)}</div>
         </div>
+        ${getLinkedIn(c.id) ? `<a class="task-btn btn-li" href="${getLinkedIn(c.id)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">in</a>` : ''}
       </div>
       <div class="badges">
         ${tierBadge(c.tier)}
@@ -1215,6 +1241,7 @@ function openModal(id) {
       ${c.priority ? '<span class="badge badge-priority">Priority send</span>' : ''}
       ${c.skip ? '<span class="badge badge-skip">Skip</span>' : ''}
       ${c.hasMessage ? `<span class="badge badge-msg">Message #${c.msgRank}</span>` : ''}
+      ${getLinkedIn(c.id) ? `<a class="badge badge-li-modal" href="${getLinkedIn(c.id)}" target="_blank" rel="noopener">Open LinkedIn →</a>` : ''}
     </div>
 
     ${c.notes_static ? `<div class="message-hook"><strong>Briefing:</strong> ${escapeHtml(c.notes_static)}</div>` : ''}
@@ -1234,6 +1261,7 @@ function openModal(id) {
 
     <div class="form-section">
       <div class="form-section-title">Working notes</div>
+      <div class="form-row"><label>LinkedIn URL</label><input type="text" data-field="linkedinUrl" value="${escapeHtml(s.linkedinUrl || (c.linkedin || ''))}" placeholder="https://linkedin.com/in/..." /></div>
       <div class="form-row"><label>Next action</label><input type="text" data-field="nextAction" value="${escapeHtml(s.nextAction)}" placeholder="e.g. follow up Monday" /></div>
       <div class="form-row"><label>Next action date</label><input type="date" data-field="nextActionDate" value="${s.nextActionDate || ''}" /></div>
       <div class="form-row"><label>Referrals given</label><input type="text" data-field="referrals" value="${escapeHtml(s.referrals)}" placeholder="names introduced" /></div>
@@ -1645,6 +1673,7 @@ function renderTaskCard(task, opts = {}) {
         <div class="task-meta">${metaHtml}</div>
       </div>
       <div class="task-actions-inline">
+        ${getLinkedIn(task.contactId) ? `<a class="task-btn btn-li" href="${getLinkedIn(task.contactId)}" target="_blank" rel="noopener">in</a>` : ''}
         <button class="task-btn btn-open" data-task-open="${task.contactId}">Open</button>
       </div>
     </div>
@@ -1726,6 +1755,7 @@ function renderToday() {
           </div>
         </div>
         <div class="task-actions-inline">
+          ${getLinkedIn(c.contactId) ? `<a class="task-btn btn-li" href="${getLinkedIn(c.contactId)}" target="_blank" rel="noopener">in</a>` : ''}
           <button class="task-btn btn-open" data-task-open="${c.contactId}">Open</button>
         </div>
       </div>
